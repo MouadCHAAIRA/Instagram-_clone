@@ -49,7 +49,7 @@
             @csrf
             @method('DELETE')
            <button class="btn">
-               <i class="fa fa-times-circle"></i>
+              <strong>delete</strong>
         </button> 
           </form>
                 <header class="photo__header">

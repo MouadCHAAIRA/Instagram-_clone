@@ -34,6 +34,7 @@ Route::get('edit_Profile',[ProfileController::class,'editProfile'])->name('edit_
 Route::put('update_Profile/{id}',[ProfileController::class,'updateProfile'])->name('update_Profile');
 Route::get('profileUser/{id}',[ProfileController::class,'find_profile_user'])->name('profileUser');
 Route::post('storeFollow',[ProfileController::class,'storeFollow'])->name('storeFollow');
+Route::delete('deleteFollow/{id}',[ProfileController::class,'destroyFollow'])->name('deleteFollow');
 
 
 //posts

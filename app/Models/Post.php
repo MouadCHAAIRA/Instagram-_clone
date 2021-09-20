@@ -33,4 +33,9 @@ class Post extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+     public function isLikedByLoggedInUser()
+    {
+        return $this->likes->where('user_id', auth()->user()->id)->isEmpty() ? false : true;
+    }
 }

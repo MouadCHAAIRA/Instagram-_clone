@@ -37,7 +37,7 @@ class ProfileController extends Controller
     {
         $user=Profile::findOrFail($id);
         $posts=Post::all();
-        $follow=Follow::where('user_id_1',Auth::user()->id)->paginate();
+        $follow=Follow::all();
         $USER=User::all();
        return view('profile.profileUser',['user'=>$user, 'posts'=>$posts,'follows'=>$follow]);
     }
@@ -104,6 +104,10 @@ class ProfileController extends Controller
        $follow->save();
        return back();
    }
-  
+  public function destroyFollow($id)
+  {
+      Follow::findOrFail($id)->delete();
+      return back();
+  }
 }
 

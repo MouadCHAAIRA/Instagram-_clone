@@ -40,8 +40,8 @@
                 </a>
             </div>
         </nav>)
+
    <main class="profile-container">
-     
          
             <section class="profile">
                 <header class="profile__header">
@@ -52,31 +52,37 @@
                              class="profile__avatar"
                         />
                     </div>
+                    
                     <div class="profile__info">
                         <div class="profile__name">
                             <h1 class="profile__title">{{$user->username}}</h1>
-                            {{-- {{-- @foreach ($follows as $follow) --}}
-                                @if ($follows->count()==0) 
+                            
+                                @if (!$follows->where('user_id_1',Auth::user()->id)->where('user_id_2',$user->user_id)->first())      
                          <form action="{{route('storeFollow')}}" method="post">
                                 @csrf
                                 <input type="hidden" value="{{$user->user_id}}" name="user_id_2">
                             <button class="profile__button u-fat-text">follow</button>
                            </form>   
                             
-                     @else
-                     
-                          <button class="profile__button u-fat-text">Unfollow</button>
-                      @endif
+                     @else 
+                     <form action="{{route('deleteFollow',$follows->where('user_id_1',Auth::user()->id)->where('user_id_2',$user->user_id)->first()->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                          <button class="profile__button u-fat-text btn btn-primary">Unfollow</button>
+                          
+                     </form>
                        
+                  
+                      @endif
                            
                         </div>
                         <ul class="profile__numbers">
                           
                             <li class="profile__followers">
-                                <span class="profile__number u-fat-text">40</span> followers
+                                <span class="profile__number u-fat-text">{{$follows->where('user_id_2',$user->user_id)->count()}}</span> followers
                             </li>
                             <li class="profile__following">
-                                <span class="profile__number u-fat-text">134</span> following
+                                <span class="profile__number u-fat-text">{{$follows->where('user_id_1',$user->user_id)->count()}}</</span> following
                             </li>
                         </ul>
                         <div class="profile__bio">
